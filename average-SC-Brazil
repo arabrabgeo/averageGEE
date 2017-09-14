@@ -1,0 +1,77 @@
+//Choose state using GEE Feature Collection
+var region = ee.FeatureCollection('ft:11rayJvRWD2TVZSx2W5kDZ-utbSC8vzHOzlRJT-ZF');
+var regOC = region.filter(ee.Filter.eq('name','OESTE CATARINENSE'));
+var regNC = region.filter(ee.Filter.eq('name','NORTE CATARINENSE'));
+var regSE = region.filter(ee.Filter.eq('name','SERRANA'));
+var regVI = region.filter(ee.Filter.eq('name','VALE DO ITAJAÍ'));
+var regGF = region.filter(ee.Filter.eq('name','GRANDE FLORIANÓPOLIS'));
+var regSC = region.filter(ee.Filter.eq('name','SUL CATARINENSE'));
+print(region);
+//Collect bands and scale
+var imagem = ee.ImageCollection('MODIS/MOD11A2').select('LST_Day_1km');
+var imagem = imagem.map(function(img) {
+  return img.multiply(0.02).subtract(273.15).copyProperties(img,['system:time_start',
+  'system:time_end']); 
+});
+//Select dates
+var collection10years = ee.ImageCollection(imagem.filterDate('2000-01-01', '2010-12-31'));
+var clipOC = collection10years.mean().clip(regOC);
+var clipNC = collection10years.mean().clip(regNC);
+var clipSE = collection10years.mean().clip(regSE);
+var clipVI = collection10years.mean().clip(regVI);
+var clipGF = collection10years.mean().clip(regGF);
+var clipSC = collection10years.mean().clip(regSC);
+//Print ("oeste  Cat", clipOC);
+var count = regOC.size();
+print('Count: ', count);
+//Charts Long Term Time Series
+var chartOC = Chart.image.series(collection10years, regOC,  ee.Reducer.mean(), 1000,
+'system:time_start').setOptions({
+          title: 'Série temporal de temperaturas na região Oeste Catarinense (2000-2010)',
+          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          vAxis: {title: 'Temperatura (Celsius)'},
+});
+print(chartOC);
+var chartNC = Chart.image.series(collection10years, regNC,  ee.Reducer.mean(), 1000,
+'system:time_start').setOptions({
+          title: 'Série temporal de temperaturas na região Norte Catarinense (2000-2010)',
+          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          vAxis: {title: 'Temperatura (Celsius)'},
+});
+print(chartNC);
+var chartSE = Chart.image.series(collection10years, regSE,  ee.Reducer.mean(), 1000,
+'system:time_start').setOptions({
+          title: 'Série temporal de temperaturas na região Serrana (2000-2010)',
+          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          vAxis: {title: 'Temperatura (Celsius)'},
+});
+print(chartSE);
+var chartVI = Chart.image.series(collection10years, regVI,  ee.Reducer.mean(), 1000,
+'system:time_start').setOptions({
+          title: 'Série temporal de temperaturas na região Vale do Itajaí (2000-2010)',
+          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          vAxis: {title: 'Temperatura (Celsius)'},
+});
+print(chartVI);
+var chartGF = Chart.image.series(collection10years, regGF,  ee.Reducer.mean(), 1000,
+'system:time_start').setOptions({
+          title: 'Série temporal de temperaturas na região Grande Florianópolis (2000-2010)',
+          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          vAxis: {title: 'Temperatura (Celsius)'},
+});
+print(chartGF);
+var chartSC = Chart.image.series(collection10years, regSC,  ee.Reducer.mean(), 1000,
+'system:time_start').setOptions({
+          title: 'Série temporal de temperaturas na região Sul Catarinense (2000-2010)',
+          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          vAxis: {title: 'Temperatura (Celsius)'},
+});
+print(chartSC);
+//Set Center of Map & Add Clipped Image Layer
+Map.setCenter(-50, -28, 7); //long, lat, zoom
+Map.addLayer (clipOC, {'min': 0, 'max': 40, 'palette':"0000ff,32cd32,ffff00,ff8c00,ff0000"},'OESTE CATARINENSE');
+Map.addLayer (clipNC, {'min': 0, 'max': 40, 'palette':"0000ff,32cd32,ffff00,ff8c00,ff0000"},'NORTE CATARINENSE');
+Map.addLayer (clipSE, {'min': 0, 'max': 40, 'palette':"0000ff,32cd32,ffff00,ff8c00,ff0000"},'SERRANA');
+Map.addLayer (clipVI, {'min': 0, 'max': 40, 'palette':"0000ff,32cd32,ffff00,ff8c00,ff0000"},'VALE DO ITAJAÍ');
+Map.addLayer (clipGF, {'min': 0, 'max': 40, 'palette':"0000ff,32cd32,ffff00,ff8c00,ff0000"},'GRANDE FLORIANÓPOLIS');
+Map.addLayer (clipSC, {'min': 0, 'max': 40, 'palette':"0000ff,32cd32,ffff00,ff8c00,ff0000"},'SUL CATARINENSE');
