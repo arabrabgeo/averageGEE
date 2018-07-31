@@ -27,43 +27,43 @@ print('Count: ', count);
 //Charts Long Term Time Series
 var chartOC = Chart.image.series(collection10years, regOC,  ee.Reducer.mean(), 1000,
 'system:time_start').setOptions({
-          title: 'Série temporal de temperaturas na região Oeste Catarinense (2000-2010)',
-          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          title: 'Temperaturas médias na mesorregião Oeste Catarinense (2000-2010)',
+          hAxis: {title: 'Tempo (ano)'},
           vAxis: {title: 'Temperatura (Celsius)'},
 });
 print(chartOC);
 var chartNC = Chart.image.series(collection10years, regNC,  ee.Reducer.mean(), 1000,
 'system:time_start').setOptions({
-          title: 'Série temporal de temperaturas na região Norte Catarinense (2000-2010)',
-          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          title: 'Temperaturas médias na mesorregião Norte Catarinense (2000-2010)',
+          hAxis: {title: 'Tempo (ano)'},
           vAxis: {title: 'Temperatura (Celsius)'},
 });
 print(chartNC);
 var chartSE = Chart.image.series(collection10years, regSE,  ee.Reducer.mean(), 1000,
 'system:time_start').setOptions({
-          title: 'Série temporal de temperaturas na região Serrana (2000-2010)',
-          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          title: 'Temperaturas médias na mesorregião Serrana (2000-2010)',
+          hAxis: {title: 'Tempo (ano)'},
           vAxis: {title: 'Temperatura (Celsius)'},
 });
 print(chartSE);
 var chartVI = Chart.image.series(collection10years, regVI,  ee.Reducer.mean(), 1000,
 'system:time_start').setOptions({
-          title: 'Série temporal de temperaturas na região Vale do Itajaí (2000-2010)',
-          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          title: 'Temperaturas médias na mesorregião Vale do Itajaí (2000-2010)',
+          hAxis: {title: 'Tempo (ano)'},
           vAxis: {title: 'Temperatura (Celsius)'},
 });
 print(chartVI);
 var chartGF = Chart.image.series(collection10years, regGF,  ee.Reducer.mean(), 1000,
 'system:time_start').setOptions({
-          title: 'Série temporal de temperaturas na região Grande Florianópolis (2000-2010)',
-          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          title: 'Temperaturas médias na mesorregião Grande Florianópolis (2000-2010)',
+          hAxis: {title: 'Tempo (ano)'},
           vAxis: {title: 'Temperatura (Celsius)'},
 });
 print(chartGF);
 var chartSC = Chart.image.series(collection10years, regSC,  ee.Reducer.mean(), 1000,
 'system:time_start').setOptions({
-          title: 'Série temporal de temperaturas na região Sul Catarinense (2000-2010)',
-          hAxis: {title: 'Tempo (dia, mês, ano)'},
+          title: 'Temperaturas médias na mesorregião Sul Catarinense (2000-2010)',
+          hAxis: {title: 'Tempo (ano)'},
           vAxis: {title: 'Temperatura (Celsius)'},
 });
 print(chartSC);
